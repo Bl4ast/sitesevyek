@@ -1,0 +1,644 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Quicksand:wght@500;700&display=swap');
+
+:root {
+    --bg-dark: #000000;         
+    --bg-lore: #02040a;         
+}
+
+body, html {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background-color: var(--bg-dark); color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    overflow: hidden; cursor: none !important;
+}
+
+h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* --- CURSOR CUSTOMIZADO --- */
+#custom-cursor-dot {
+    width: 6px; height: 6px; background: #fff; border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 99999; 
+    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+}
+#custom-cursor-glow {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.4) 0%, transparent 70%);
+    position: fixed; pointer-events: none; z-index: 99998; 
+    transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s;
+}
+.hidden { display: none !important; opacity: 0; pointer-events: none; visibility: hidden; }
+
+/* --- INTRO & ESTRELAS --- */
+#intro-container {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    background-color: var(--bg-dark); z-index: 1000; transition: opacity 0.8s ease;
+}
+#stars-bg {
+    position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+    pointer-events: none; opacity: 0; transition: opacity 2s ease;
+}
+.intro-star {
+    position: absolute; background: #fff; border-radius: 50%;
+    animation: twinkle 3s infinite alternate;
+}
+@keyframes twinkle { 0% { transform: scale(0.8); opacity: 0.2; } 100% { transform: scale(1.2); opacity: 1; } }
+
+/* --- BOTÃO INICIAR --- */
+.btn-start {
+    position: absolute; z-index: 200; padding: 15px 40px; font-size: 1.2rem; background: transparent;
+    color: #fff; border: 2px solid rgba(255,255,255,0.3); border-radius: 50px; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; transition: all 0.4s ease;
+}
+.btn-start:hover { background: #fff; color: #000; box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+.btn-start.fade-out { opacity: 0; pointer-events: none; transform: scale(0.9); }
+
+/* --- LUA 3D --- */
+.moon-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; z-index: 50; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); }
+#moon-phase { width: 100%; height: 100%; border-radius: 50%; position: relative; overflow: hidden; background-color: var(--bg-dark); }
+.moon-half-light { position: absolute; top: 0; left: 0; width: 50%; height: 100%; background-color: #fff; }
+.moon-half-dark { position: absolute; top: 0; right: 0; width: 50%; height: 100%; background-color: var(--bg-dark); }
+.moon-flap-left { position: absolute; top: 0; left: 0; width: 50%; height: 100%; background-color: var(--bg-dark); transform-origin: right center; border-radius: 140px 0 0 140px; }
+.moon-flap-right { position: absolute; top: 0; right: 0; width: 50%; height: 100%; background-color: #fff; transform-origin: left center; border-radius: 0 140px 140px 0; transform: rotateY(90deg); }
+.start-anim .moon-flap-left { animation-name: phaseCrescent; animation-timing-function: linear; animation-fill-mode: forwards; }
+.start-anim .moon-flap-right { animation-name: phaseGibbous; animation-timing-function: linear; animation-fill-mode: forwards; }
+@keyframes phaseCrescent { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(90deg); } }
+@keyframes phaseGibbous { 0% { transform: rotateY(90deg); } 100% { transform: rotateY(0deg); } }
+.kaboom { animation: kaboomFlash 1.5s ease-out forwards; }
+@keyframes kaboomFlash { 0% { box-shadow: 0 0 10px #fff; transform: scale(1); } 40% { box-shadow: 0 0 150px 80px rgba(255,255,255,1), 0 0 300px 150px rgba(255,255,255,0.7); transform: scale(1.2); background-color: #fff; } 100% { box-shadow: 0 0 50px rgba(255,255,255,0.4); transform: scale(1); background-color: #fff; } }
+.camera-pan-down .moon-container { transform: translate(-50%, -250%); }
+
+/* --- TELA DE SELEÇÃO --- */
+#selection-screen { position: absolute; top: 35%; left: 0; width: 100%; height: 60%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 1s ease; }
+.split-divider { position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent); transform: translateX(-50%) scaleY(0); transform-origin: center; }
+.show-divider { animation: drawLine 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+@keyframes drawLine { 0% { transform: translateX(-50%) scaleY(0); } 50% { box-shadow: 0 0 30px 5px rgba(255,255,255,1); } 100% { transform: translateX(-50%) scaleY(1); box-shadow: 0 0 15px rgba(255,255,255,0.3); } }
+.split-panel { width: 50%; height: 100%; display: flex; justify-content: center; align-items: center; transition: background 0.5s ease; cursor: pointer; }
+.char-square { width: 260px; height: 380px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; position: relative; }
+.char-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: contain; background-position: center bottom; background-repeat: no-repeat; z-index: 1; transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s ease; }
+.char-name { font-size: 1.6rem; font-weight: 700; letter-spacing: 4px; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,1); transition: all 0.4s ease; }
+.split-left:hover { background: radial-gradient(circle at center, var(--char1-bg-hover) 0%, transparent 60%); }
+.split-left:hover .char-img { filter: drop-shadow(0 0 15px var(--char1-color)) drop-shadow(0 0 30px var(--char1-glow-strong)); transform: translateY(-15px) scale(1.05); }
+.split-left:hover .char-name { color: var(--char1-color); text-shadow: 0 0 15px var(--char1-color), 0 5px 10px rgba(0,0,0,0.8); transform: translateY(-15px); }
+.split-right:hover { background: radial-gradient(circle at center, var(--char2-bg-hover) 0%, transparent 60%); }
+.split-right:hover .char-img { filter: drop-shadow(0 0 15px var(--char2-color)) drop-shadow(0 0 30px var(--char2-glow-strong)); transform: translateY(-15px) scale(1.05); }
+.split-right:hover .char-name { color: var(--char2-color); text-shadow: 0 0 15px var(--char2-color), 0 5px 10px rgba(0,0,0,0.8); transform: translateY(-15px); }
+
+#zoom-transition { position: fixed; width: 15px; height: 15px; border-radius: 50%; background: #fff; transform: translate(-50%, -50%) scale(0); z-index: 2000; pointer-events: none; will-change: transform, opacity; transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1), opacity 0.6s ease; }
+
+/* =======================================================
+   PAINEL DE LORE 
+   ======================================================= */
+#profile-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: var(--bg-lore); z-index: 100; opacity: 0; transition: opacity 1s ease 0.5s; overflow: hidden; }
+#dynamic-bg { position: absolute; top: -5%; left: -5%; width: 110%; height: 110%; background-size: cover; background-position: center; background-repeat: no-repeat; z-index: -1; opacity: 0.6; transition: background-image 0.5s ease, filter 0.5s ease; }
+
+/* ✨ 1. Aumentamos a largura total do painel para quase a tela toda ✨ */
+.glass-panel { 
+    width: 98vw; /* Antes era 95vw */
+    max-width: 1750px; /* Aumentado bastante para dar espaço à arte */
+    height: 85vh; 
+    background: rgba(3, 8, 20, 0.65); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); 
+    border: 1.5px solid rgba(0, 191, 255, 0.4); border-radius: 28px; 
+    display: flex; padding: 35px; gap: 40px; 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 140, 255, 0.08); 
+}
+
+/* ✨ 2. Reduzimos um pouquinho a área do personagem solto para compensar ✨ */
+.panel-left-art { 
+    width: 32%; /* Reduzido de 35% para 32% */
+    height: 100%; position: relative; background: transparent; border: none; overflow: visible; box-shadow: none; display: flex; justify-content: center; align-items: center; 
+}
+
+/* ✨ 3. Expandimos o painel direito e igualamos as colunas para a arte ficar quadrada ✨ */
+.panel-right-content { 
+    width: 68%; /* Aumentado para 68% */
+    display: grid; gap: 25px; 
+    grid-template-areas: 
+        "playlist arte"
+        "info arte"
+        "lore lore"
+        "heads botoes";
+    grid-template-columns: 1fr 1fr; /* Colunas 50/50 garantem que a arte fica larga e quadrada */
+    grid-template-rows: 200px 1fr auto 1.2fr; 
+}
+
+/* ✨ ARTE PRINCIPAL (Flutua e Aura) ✨ */
+@keyframes flutuarAnim {
+    0% { translate: 0 0; }
+    50% { translate: 0 -15px; } 
+    100% { translate: 0 0; }
+}
+.panel-left-art { width: 35%; height: 100%; position: relative; background: transparent; border: none; overflow: visible; box-shadow: none; display: flex; justify-content: center; align-items: center; }
+
+.character-full-art { 
+    width: 100%; height: 100%; 
+    background-size: contain; background-position: center bottom; background-repeat: no-repeat; 
+    filter: drop-shadow(0 0 25px rgba(0, 191, 255, 0.6)) drop-shadow(0 15px 30px rgba(0,0,0,0.8));
+    animation: flutuarAnim 4s ease-in-out infinite;
+    transition: background-image 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(1.1); 
+}
+.panel-left-art:hover .character-full-art { transform: scale(1.15); }
+
+/* ✨ Painel Direito e Grelha ✨ */
+.panel-right-content { 
+    width: 65%; display: grid; gap: 20px; 
+    grid-template-areas: 
+        "playlist arte"
+        "info arte"
+        "lore lore"
+        "heads botoes";
+    grid-template-columns: 1.1fr 1fr; /* Colunas ajustadas para a arte ficar com boa largura */
+    grid-template-rows: 200px 1fr auto 1.2fr; 
+}
+
+/* PAINÉIS EXTERNOS - Base */
+.box-playlist, .stats-grid, .box-botoes-neon { 
+    background: rgba(4, 10, 24, 0.45) !important; 
+    border: 1.5px solid rgba(0, 191, 255, 0.4) !important; 
+    border-radius: 16px; backdrop-filter: blur(10px); 
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.3), inset 0 0 15px rgba(0, 191, 255, 0.1) !important; 
+    position: relative; 
+}
+
+/* Ponto Neon */
+.stats-grid::before, .box-botoes-neon::before { 
+    content: ''; position: absolute; top: -5px; left: 24px; width: 8px; height: 8px; 
+    background-color: #00e5ff; border-radius: 50%; box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff, 0 0 30px #00e5ff; z-index: 10; 
+}
+
+/* --- PLAYLIST --- */
+.box-playlist { grid-area: playlist; overflow: hidden; padding: 20px !important; display: flex !important; flex-direction: column; gap: 15px; }
+.playlist-header { display: flex; align-items: center; gap: 12px; }
+.playlist-dot { width: 8px; height: 8px; background-color: #00e5ff; border-radius: 50%; box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff; }
+.playlist-title { color: #00e5ff; font-size: 1.15rem; font-weight: 800; letter-spacing: 3px; margin: 0; text-transform: uppercase; font-family: 'Outfit', sans-serif; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+.box-playlist iframe { width: 100% !important; flex: 1; display: block; border: none; border-radius: 12px; }
+
+/* --- ARTE LUKEA (Agora com 'cover' para preencher perfeitamente) --- */
+.box-arte-lukea { 
+    grid-area: arte; 
+    border: 1.5px solid rgba(0, 191, 255, 0.4); border-radius: 16px;
+    background-color: rgba(4, 10, 24, 0.45);
+    background-size: cover; /* ✨ Preenche a caixa inteira sem deixar barras vazias ✨ */
+    background-position: center; background-repeat: no-repeat; 
+    overflow: hidden; box-shadow: 0 0 15px rgba(0, 191, 255, 0.3); 
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+}
+.box-arte-lukea h3 { color: #00e5ff; font-size: 1rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5); font-weight: 700; font-family: 'Outfit', sans-serif;}
+
+/* --- CAIXAS CENTRAIS (Info & Status) --- */
+.box-info { grid-area: info; display: flex; width: 100%; padding: 0; }
+
+/* Oculta completamente o quadrado azul de texto */
+.texto-bla { display: none !important; }
+
+/* ✨ Grelha de Status expandida para ocupar o espaço do texto ✨ */
+.stats-grid { 
+    width: 100%; 
+    display: grid; gap: 15px; 
+    grid-template-columns: 1fr 1fr; /* 2 Colunas perfeitamente alinhadas */
+    padding: 20px; 
+}
+.stat-item { 
+    background: transparent; border: 1px solid rgba(0, 191, 255, 0.5); 
+    border-radius: 12px; padding: 12px; display: flex; flex-direction: column; 
+    align-items: center; justify-content: center; text-align: center; 
+    box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1); 
+}
+.stat-item span { font-size: 0.65rem; color: #00e5ff; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; margin-bottom: 2px; }
+.stat-item strong { font-size: 1rem; color: #fff; font-weight: 700; }
+.btn-face-futuro { 
+    grid-column: 1 / span 2; /* O botão estica pelas duas colunas */
+    background: transparent; border: 1px solid rgba(0, 191, 255, 0.5); color: #00e5ff; 
+    border-radius: 12px; padding: 15px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; 
+    letter-spacing: 2px; display: flex; justify-content: center; align-items: center; text-align: center; 
+    box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1); 
+}
+
+/* =======================================================
+   BOTÕES E CABEÇAS
+   ======================================================= */
+.box-botoes-neon { grid-area: botoes; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-neon { background: transparent; border: 1px solid rgba(0, 191, 255, 0.5); color: #00e5ff; border-radius: 12px; padding: 14px; font-size: 0.95rem; font-weight: 800; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; letter-spacing: 1.5px; box-shadow: inset 0 0 10px rgba(0, 191, 255, 0.1); }
+.btn-neon:hover { background: rgba(0, 191, 255, 0.15); box-shadow: 0 0 15px rgba(0, 191, 255, 0.4), inset 0 0 10px rgba(0, 191, 255, 0.2); color: #fff; transform: translateY(-2px); }
+.full-width { grid-column: 1 / span 2; }
+
+.box-lore-btn { grid-area: lore; display: flex; justify-content: center; align-items: center; padding: 10px 0; }
+#btn-ler-lore { background: transparent; border: none; color: #fff; font-size: 2rem; font-weight: 800; font-family: 'Outfit', sans-serif; cursor: pointer; transition: all 0.3s ease; text-shadow: 0 2px 10px rgba(0, 229, 255, 0.6); letter-spacing: 3px; }
+#btn-ler-lore:hover { transform: scale(1.04); color: #00e5ff; text-shadow: 0 0 15px #00e5ff; }
+
+.box-heads { grid-area: heads; display: flex; justify-content: space-around; align-items: center; gap: 15px; }
+.head-icon { width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 15px; font-weight: 800; font-size: 0.95rem; text-shadow: 0 2px 4px rgba(0,0,0,0.9); background-size: contain; background-position: center; background-repeat: no-repeat; cursor: pointer; transition: transform 0.4s ease, filter 0.4s ease; transform: scale(1.15); }
+.head-lukea { color: transparent; filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8)); }
+.head-lukea:hover { transform: scale(1.25); filter: drop-shadow(0 0 25px rgba(16, 185, 129, 1)); }
+.head-ficha { color: transparent; filter: drop-shadow(0 0 15px rgba(0, 191, 255, 0.8)); }
+.head-ficha:hover { transform: scale(1.25); filter: drop-shadow(0 0 25px rgba(0, 191, 255, 1)); }
+
+
+/* =======================================================
+   ✨ MODAL / POP-UP ANIMADO (NOVO ESTILO GROSSO E NEON) ✨
+   ======================================================= */
+#modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(2, 3, 6, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    display: flex; justify-content: center; align-items: center; z-index: 3000;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes modalEntrada {
+    0% { transform: translateY(50px) scale(0.95); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-box {
+    background: rgba(20, 20, 25, 0.4); border: 2px solid #00e5ff; border-radius: 30px;
+    width: 90vw; max-width: 800px; max-height: 85vh; padding: 50px; position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8), 0 0 30px rgba(0, 229, 255, 0.7);
+    display: flex; flex-direction: column; overflow: hidden; text-align: center;
+    animation: modalEntrada 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+#modal-close {
+    position: absolute; top: 20px; right: 30px; background: transparent; border: none;
+    color: #00e5ff; font-size: 2.5rem; transition: 0.3s; line-height: 1; cursor: pointer;
+}
+#modal-close:hover { transform: scale(1.2) rotate(90deg); text-shadow: 0 0 15px rgba(0, 229, 255, 0.7); color: #fff; }
+
+#modal-header {
+    font-size: 3.5rem; margin: 0 0 40px 0; text-transform: uppercase; letter-spacing: 4px;
+    color: #00e5ff; font-family: 'Outfit', sans-serif; font-weight: 800;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.7), 0 0 30px #00e5ff;
+}
+
+#modal-body { overflow-y: auto; padding-right: 10px; flex: 1; }
+#modal-body::-webkit-scrollbar { width: 6px; }
+#modal-body::-webkit-scrollbar-track { background: transparent; }
+#modal-body::-webkit-scrollbar-thumb { background: #00e5ff; border-radius: 10px; }
+
+/* TEXTO */
+.modal-text-box {
+    font-size: 1.15rem; line-height: 1.9; color: #ddd; text-align: justify;
+    background: rgba(0,0,0,0.5); padding: 30px; border-radius: 15px; 
+    border: 1px solid rgba(255,255,255,0.1); border-left: 4px solid #00e5ff; 
+    font-family: 'Quicksand', sans-serif; font-weight: 500; transition: 0.3s;
+}
+.modal-text-box:hover { background: rgba(255,255,255,0.08); transform: translateX(5px); border-color: #00e5ff; box-shadow: 0 5px 15px rgba(0, 229, 255, 0.5); }
+
+/* GALERIA (Artes) */
+.modal-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; margin-top: 10px;}
+.modal-gallery-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.modal-gallery-item img {
+    width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.4s; opacity: 0.9;
+}
+.modal-gallery-item:hover img { opacity: 1; border-color: #00e5ff; box-shadow: 0 10px 25px rgba(0, 229, 255, 0.7); transform: scale(1.05); z-index: 2; }
+.modal-gallery-item span { color: #00e5ff; font-weight: bold; font-size: 0.9rem; letter-spacing: 1px; text-shadow: 0 0 5px rgba(0, 229, 255, 0.7); display: block; }
+
+/* Q&A */
+.modal-qa-list { display: flex; flex-direction: column; gap: 20px; text-align: left; }
+.modal-qa-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 25px; border-left: 4px solid #00e5ff; transition: 0.3s;
+}
+.modal-qa-card:hover { background: rgba(255,255,255,0.08); transform: translateX(5px); border-color: #00e5ff; box-shadow: 0 5px 15px rgba(0, 229, 255, 0.5); }
+.qa-p { color: #00e5ff; font-weight: 800; font-size: 1.1rem; margin-bottom: 10px; text-transform: uppercase; font-family: 'Outfit', sans-serif; text-shadow: 0 0 5px rgba(0, 229, 255, 0.5); }
+.qa-r { color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; font-family: 'Quicksand', sans-serif; }
+
+/* LISTA (Curiosidades) */
+.modal-list-container { display: flex; flex-direction: column; gap: 20px; text-align: left; }
+.modal-list-card {
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 25px; border-left: 4px solid #00e5ff; transition: 0.3s;
+    color: #e0e0e0; font-size: 1.1rem; line-height: 1.6; font-family: 'Quicksand', sans-serif;
+}
+.modal-list-card:hover { background: rgba(255,255,255,0.08); transform: translateX(5px); border-color: #00e5ff; box-shadow: 0 5px 15px rgba(0, 229, 255, 0.5); }
+
+/* =======================================================
+   ✨ TELA DE LORE (ESTILO NOTION) ✨
+   ======================================================= */
+#lore-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: #02040a; z-index: 4000; overflow: hidden;
+    opacity: 0; visibility: hidden; transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+#lore-screen:not(.hidden) {
+    opacity: 1; visibility: visible;
+}
+
+.lore-scroll-container {
+    width: 100%; height: 100%; overflow-y: auto; overflow-x: hidden;
+    position: relative; padding-bottom: 100px;
+}
+.lore-scroll-container::-webkit-scrollbar { width: 8px; }
+.lore-scroll-container::-webkit-scrollbar-track { background: rgba(0, 191, 255, 0.05); }
+.lore-scroll-container::-webkit-scrollbar-thumb { background: #00e5ff; border-radius: 10px; }
+
+/* Banner Superior */
+.lore-banner {
+    width: 100%; height: 35vh; background-size: cover; background-position: center;
+    border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+
+/* Corpo do Conteúdo */
+.lore-content-wrapper {
+    max-width: 900px; width: 90vw; margin: 0 auto; padding: 0 30px;
+    position: relative; display: flex; flex-direction: column; align-items: flex-start;
+}
+
+/* Ícone Estilo Notion (Sobrepõe o Banner) */
+.lore-icon {
+    width: 120px; height: 120px; border-radius: 20px;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    border: 3px solid #00e5ff; background-color: #02050e;
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.5);
+    margin-top: -60px; /* ✨ Efeito de sobreposição igual ao Notion ✨ */
+    margin-bottom: 30px;
+    z-index: 10;
+}
+
+/* Título do Capítulo */
+#lore-titulo {
+    font-size: 2.8rem; font-weight: 800; color: #fff;
+    font-family: 'Outfit', sans-serif; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 30px;
+    text-shadow: 0 0 15px rgba(0, 229, 255, 0.6);
+}
+
+/* Texto da Lore */
+.lore-text-body {
+    font-size: 1.15rem; line-height: 1.9; color: #d0d5e2;
+    font-family: 'Quicksand', sans-serif; font-weight: 500;
+    text-align: justify; display: flex; flex-direction: column; gap: 20px;
+    width: 100%;
+}
+
+/* Botão Voltar */
+#btn-voltar-lore {
+    position: fixed; top: 25px; left: 30px; z-index: 4500;
+    background: rgba(2, 5, 14, 0.8); border: 1.5px solid #00e5ff;
+    color: #00e5ff; padding: 12px 25px; border-radius: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 800; cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.4); transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+#btn-voltar-lore:hover {
+    background: #00e5ff; color: #000; transform: scale(1.05);
+    box-shadow: 0 0 25px #00e5ff;
+}
+
+/* =======================================================
+   ✨ SISTEMA DE CAPÍTULOS DE LORE (DINÂMICO) ✨
+   ======================================================= */
+/* =======================================================
+   ✨ BANNER E FUNDO COM FILTRO AZUL ESCURO (ATMOSFERA) ✨
+   ======================================================= */
+
+.chapter-screen {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 4000; opacity: 0; visibility: hidden; pointer-events: none;
+    background-color: #02040a;
+    transform: translateY(20px) scale(0.97);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), 
+                visibility 0.9s ease-in-out;
+}
+
+.chapter-screen.show-chapter {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transform: translateY(0) scale(1);
+}
+
+/* Fundo de baixo: Mais escuro e com o azul noturno acentuado */
+.chapter-screen::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2, 6, 18, 0.85); /* Mais escuro e imersivo */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.extra-bg-blur {
+    position: absolute; top: -5%; left: -5%; width: 110%; height: 110%;
+    background-size: cover; background-position: center; filter: blur(25px); z-index: 0;
+}
+
+.extra-scroll-area {
+    position: relative; width: 100%; height: 100%; z-index: 2;
+    overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.extra-scroll-area.fade-out {
+    opacity: 0;
+    transform: translateY(15px);
+}
+
+/* Banner de cima: Sem nenhum efeito ou sobreposição */
+.notion-cover {
+    width: 100%; 
+    height: 35vh; 
+    background-size: cover; 
+    background-position: center;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    position: relative;
+}
+
+/* Garante que nenhum efeito seja aplicado no banner de cima */
+.notion-cover::after {
+    display: none !important;
+}
+
+.notion-container {
+    max-width: 900px; width: 90vw; margin: 0 auto; padding: 0 30px 100px 30px;
+    position: relative; display: flex; flex-direction: column; align-items: flex-start;
+}
+
+.notion-icon {
+    width: 120px; height: 120px; border-radius: 20px;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    border: 3px solid var(--theme-color, #00e5ff); background-color: #02050e;
+    box-shadow: 0 0 25px var(--theme-glow, rgba(0, 229, 255, 0.5));
+    margin-top: -60px; margin-bottom: 30px; z-index: 10;
+    display: flex; justify-content: center; align-items: center; color: #fff;
+}
+
+.notion-title {
+    font-size: 2.8rem; font-weight: 800; color: #fff;
+    font-family: 'Outfit', sans-serif; text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 30px;
+    text-shadow: 0 0 15px var(--theme-glow, rgba(0, 229, 255, 0.6));
+}
+
+.notion-content {
+    font-size: 1.15rem; line-height: 1.9; color: #d0d5e2;
+    font-family: 'Quicksand', sans-serif; font-weight: 500;
+    text-align: justify; display: flex; flex-direction: column; gap: 20px;
+    width: 100%;
+}
+
+.lore-fixed-btn {
+    position: fixed; top: 25px; left: 30px; z-index: 4500;
+    background: rgba(2, 5, 14, 0.8); border: 1.5px solid var(--theme-color, #00e5ff);
+    color: var(--theme-color, #00e5ff); padding: 12px 25px; border-radius: 12px;
+    font-family: 'Outfit', sans-serif; font-weight: 800; cursor: pointer;
+    box-shadow: 0 0 15px var(--theme-glow, rgba(0, 229, 255, 0.4));
+    backdrop-filter: blur(10px); transition: all 0.3s ease;
+}
+.lore-fixed-btn:hover {
+    background: var(--theme-color, #00e5ff); color: #000; transform: scale(1.05);
+}
+
+.btn-next-chapter, .btn-prev-chapter {
+    background: rgba(4, 10, 24, 0.7) !important;
+    border: 1.5px solid var(--theme-color, #00e5ff) !important;
+    color: #fff !important; padding: 18px 30px !important; border-radius: 16px !important;
+    font-family: 'Outfit', sans-serif !important; font-weight: 800 !important; font-size: 1.1rem !important;
+    text-transform: uppercase; letter-spacing: 2px; cursor: pointer; width: 100%;
+    box-shadow: 0 0 15px var(--theme-glow, rgba(0, 229, 255, 0.3)) !important;
+    transition: all 0.3s ease !important; margin-top: 30px; display: flex; justify-content: center; align-items: center; gap: 10px;
+}
+.btn-next-chapter:hover, .btn-prev-chapter:hover {
+    background: var(--theme-color, #00e5ff) !important; color: #000 !important;
+    box-shadow: 0 0 25px var(--theme-glow, rgba(0, 229, 255, 0.7)) !important; transform: translateY(-3px);
+}
+
+/* =======================================================
+   ✨ TRANSIÇÃO SUAVE DO CONTEÚDO DOS CAPÍTULOS ✨
+   ======================================================= */
+.extra-scroll-area {
+    position: relative; width: 100%; height: 100%; z-index: 2;
+    overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.extra-scroll-area.fade-out {
+    opacity: 0;
+    transform: translateY(15px); /* Faz um leve deslize para baixo ao sair */
+}
+
+/* =======================================================
+   ✨ RESPONSIVIDADE ADAPTATIVA (TABLETS E JANELAS MÉDIAS) ✨
+   ======================================================= */
+
+/* Para ecrãs com largura inferior a 1200px (Portáteis menores e janelas redimensionadas) */
+@media (max-width: 1200px) {
+    .glass-panel {
+        flex-direction: column !important;
+        width: 90vw !important;
+        max-width: 700px;
+        height: auto !important;
+        max-height: 85vh;
+        overflow-y: auto;
+        padding: 20px !important;
+    }
+
+    .panel-left-art, .panel-right-content {
+        width: 100% !important;
+        height: auto !important;
+    }
+
+    .panel-left-art {
+        min-height: 350px;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 1400px), (max-height: 900px) {
+    /* Força o painel principal a ajustar-se à altura exata do ecrã */
+    .glass-panel {
+        flex-direction: row !important;
+        width: 96vw !important;
+        max-width: 1300px;
+        height: 96vh !important;
+        max-height: 820px;
+        padding: 10px 15px !important;
+        gap: 12px !important;
+        box-sizing: border-box;
+        overflow: hidden !important;
+    }
+
+    /* Coluna Esquerda (Arte de Corpo Inteiro) */
+    .panel-left-art {
+        width: 38% !important;
+        height: 100% !important;
+        min-height: unset !important;
+    }
+
+    .character-full-art {
+        height: 100% !important;
+        background-size: contain !important;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+    }
+
+    /* Coluna Direita (Dashboard compactada para nunca transbordar) */
+    .panel-right-content {
+        width: 62% !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+        gap: 4px !important;
+        overflow: hidden !important;
+    }
+
+    /* Player de música compacto */
+    .box-playlist {
+        padding: 4px 8px !important;
+        margin-bottom: 0 !important;
+    }
+    .box-playlist iframe {
+        height: 48px !important;
+    }
+
+    /* Grelha de estatísticas compacta */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 4px !important;
+    }
+
+    .stat-item {
+        padding: 4px 8px !important;
+        font-size: 0.8rem;
+    }
+
+    /* Botão de Ler Lore */
+    .box-lore-btn button {
+        padding: 6px !important;
+        font-size: 0.85rem !important;
+        margin: 2px 0 !important;
+    }
+
+    /* Ícones das cabeças */
+    .box-heads {
+        gap: 6px !important;
+        margin-bottom: 2px !important;
+    }
+    .head-icon {
+        height: 35px !important;
+    }
+
+    /* Botões Neon perfeitamente encaixados no rodapé */
+    .box-botoes-neon {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 4px !important;
+    }
+
+    .btn-neon {
+        width: 100% !important;
+        padding: 6px 2px !important;
+        font-size: 0.68rem !important;
+        letter-spacing: 0.3px !important;
+    }
+}
