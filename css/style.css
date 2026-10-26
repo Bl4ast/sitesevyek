@@ -70,12 +70,23 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
 .camera-pan-down .moon-container { transform: translate(-50%, -250%); }
 
 /* --- TELA DE SELEÇÃO --- */
-#selection-screen { position: absolute; top: 35%; left: 0; width: 100%; height: 60%; display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 1s ease; }
+#selection-screen { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    opacity: 0; 
+    transition: opacity 1s ease; 
+}
 .split-divider { position: absolute; left: 50%; top: 0; width: 2px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.8), transparent); transform: translateX(-50%) scaleY(0); transform-origin: center; }
 .show-divider { animation: drawLine 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 @keyframes drawLine { 0% { transform: translateX(-50%) scaleY(0); } 50% { box-shadow: 0 0 30px 5px rgba(255,255,255,1); } 100% { transform: translateX(-50%) scaleY(1); box-shadow: 0 0 15px rgba(255,255,255,0.3); } }
 .split-panel { width: 50%; height: 100%; display: flex; justify-content: center; align-items: center; transition: background 0.5s ease; cursor: pointer; }
-.char-square { width: 260px; height: 380px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; position: relative; }
+.char-square { width: 375px; height: 470px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 20px; position: relative; }
 .char-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: contain; background-position: center bottom; background-repeat: no-repeat; z-index: 1; transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s ease; }
 .char-name { font-size: 1.6rem; font-weight: 700; letter-spacing: 4px; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,1); transition: all 0.4s ease; }
 .split-left:hover { background: radial-gradient(circle at center, var(--char1-bg-hover) 0%, transparent 60%); }
@@ -681,4 +692,74 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
     display: flex; 
     justify-content: center; 
     align-items: center; 
+}
+
+.single-char-container { 
+    display: flex; flex-direction: column; align-items: center; cursor: pointer; 
+    position: relative; padding: 30px; 
+    background: radial-gradient(circle at center, rgba(0, 191, 255, 0.15) 0%, transparent 70%); 
+    border-radius: 50px; transition: all 0.4s ease; 
+    
+    /* ✨ Altere este valor para descer ou subir o personagem ✨ */
+    margin-top: 120px; 
+}
+
+.single-char-container .char-square { 
+    width: 280px; 
+    height: 380px; 
+    display: flex; 
+    align-items: flex-end; 
+    justify-content: center; 
+    position: relative; 
+}
+
+/* Imagem com Aura Azul Intensa */
+.single-char-container .char-img { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 120%; 
+    height: 120%; 
+    background-size: contain; 
+    background-position: center bottom; 
+    background-repeat: no-repeat; 
+    z-index: 1; 
+    
+    /* ✨ AURA AZUL FORTE E BRILHANTE ✨ */
+    filter: drop-shadow(0 0 25px rgba(0, 191, 255, 0.8)) drop-shadow(0 0 50px rgba(0, 229, 255, 0.5));
+    transition: filter 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), transform 0.4s ease; 
+}
+
+/* Nome do Personagem */
+.single-char-container .char-name { 
+    font-size: 1.8rem; 
+    font-weight: 700; 
+    letter-spacing: 4px; 
+    position: relative; 
+    z-index: 2; 
+    color: #fff;
+    margin-top: 15px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.9), 0 0 20px rgba(0, 191, 255, 0.8); 
+    transition: all 0.4s ease; 
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Efeito Hover (Ao passar o rato por cima) */
+.single-char-container:hover {
+    background: radial-gradient(circle at center, rgba(0, 191, 255, 0.3) 0%, transparent 75%);
+}
+
+.single-char-container:hover .char-img { 
+    filter: drop-shadow(0 0 35px rgba(0, 191, 255, 1)) drop-shadow(0 0 70px rgba(0, 229, 255, 0.8)); 
+    transform: translateY(-10px) scale(1.06); 
+}
+
+.single-char-container:hover .char-name { 
+    color: #00e5ff; 
+    text-shadow: 0 0 20px #00e5ff, 0 5px 15px rgba(0,0,0,0.8); 
+    transform: translateY(-5px); 
+}
+
+#panel-left {
+    margin-top: 170px; 
 }
