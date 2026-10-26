@@ -554,24 +554,23 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
 }
 
 @media (max-width: 1400px), (max-height: 900px) {
+    /* Mantém o painel perfeitamente alinhado lado a lado */
     .glass-panel {
         flex-direction: row !important;
         width: 95vw !important;
         max-width: 1250px;
-        height: auto !important; /* Deixa a altura fluida para nunca cortar */
-        min-height: 85vh;       /* Garante um tamanho bom mas sem prender excessivamente */
-        max-height: 92vh;       /* Evita que ultrapasse o ecrã */
-        padding: 10px 15px !important;
-        gap: 12px !important;
+        height: 90vh !important;
+        max-height: 800px;
+        padding: 12px 18px !important;
+        gap: 15px !important;
         box-sizing: border-box;
+        overflow: hidden !important;
     }
-}
 
     /* Coluna Esquerda (Arte de Corpo Inteiro) */
     .panel-left-art {
         width: 38% !important;
         height: 100% !important;
-        min-height: unset !important;
     }
 
     .character-full-art {
@@ -581,34 +580,34 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
         background-position: center bottom;
     }
 
-    /* Coluna Direita (Dashboard compactada para nunca transbordar) */
+    /* Coluna Direita (Dashboard estruturada) */
     .panel-right-content {
         width: 62% !important;
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        gap: 4px !important;
+        gap: 6px !important;
         overflow: hidden !important;
     }
 
     /* Player de música compacto */
     .box-playlist {
-        padding: 4px 8px !important;
+        padding: 4px 10px !important;
         margin-bottom: 0 !important;
     }
     .box-playlist iframe {
-        height: 48px !important;
+        height: 45px !important;
     }
 
-    /* Grelha de estatísticas compacta */
+    /* Grelha de estatísticas */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 4px !important;
+        gap: 5px !important;
     }
 
     .stat-item {
-        padding: 4px 8px !important;
+        padding: 5px 8px !important;
         font-size: 0.8rem;
     }
 
@@ -621,24 +620,32 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
 
     /* Ícones das cabeças */
     .box-heads {
-        gap: 6px !important;
+        gap: 8px !important;
         margin-bottom: 2px !important;
     }
     .head-icon {
-        height: 35px !important;
+        height: 38px !important;
     }
 
-    /* Botões Neon perfeitamente encaixados no rodapé */
+    /* Caixa de arte à direita (garante que nunca desaparece) */
+    .box-arte-lukea {
+        flex: 1 !important;
+        min-height: 100px !important;
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    /* Botões Neon organizados em grelha limpa */
     .box-botoes-neon {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 4px !important;
+        gap: 5px !important;
     }
 
     .btn-neon {
         width: 100% !important;
-        padding: 6px 2px !important;
-        font-size: 0.68rem !important;
+        padding: 6px 4px !important;
+        font-size: 0.7rem !important;
         letter-spacing: 0.3px !important;
     }
 }
