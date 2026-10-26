@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
             else { boxArteDireita.style.backgroundImage = 'none'; boxArteDireita.innerHTML = '<h3>ARTE COM O PERSONAGEM DO LUKEA</h3>'; }
         }
 
-        const headLukea = document.querySelector('.head-lukea');
+const headLukea = document.querySelector('.head-lukea');
         if (headLukea) {
             headLukea.onmouseenter = null; headLukea.onmouseleave = null;
             if (char.icone_lukea && char.icone_lukea !== '') {
@@ -243,6 +243,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (char.icone_lukea_hover && char.icone_lukea_hover !== '') { headLukea.onmouseenter = () => headLukea.style.backgroundImage = `url('${char.icone_lukea_hover}')`; headLukea.onmouseleave = () => headLukea.style.backgroundImage = `url('${char.icone_lukea}')`; }
             } else { headLukea.style.backgroundImage = 'none'; headLukea.innerText = 'LUKEA'; headLukea.style.color = '#fff'; }
         }
+
+       document.querySelector('.head-lukea')?.addEventListener('click', () => {
+        if (!personagemAtivo) return;
+        
+        modalHeader.innerHTML = 'Hélio';
+        modalBody.innerHTML = 'SevyIMGS/ArteL.png'; 
+
+        // Puxa o texto diretamente do objeto do personagem ativo no banco.js
+        const textoDoBanco = personagemAtivo['lukea_texto'] || 'Texto não encontrado no banco.js.';
+
+        // Cria a caixa de texto estilizada em verde (igualzinha ao modelo da sua foto, mas para leitura)
+        modalBody.innerHTML = `
+            <div class="modal-text-box" style="
+                border-color: #00ff66; 
+                box-shadow: 0 0 20px rgba(0, 255, 102, 0.3); 
+                background: rgba(0, 10, 2, 0.95); 
+                color: #00ff66; 
+                overflow-y: auto; 
+                max-height: 400px; 
+                padding: 20px; 
+                font-size: 15px; 
+                line-height: 1.6;
+            ">
+                ${textoDoBanco}
+            </div>
+        `;
+
+        modalOverlay.classList.remove('hidden');
+        setTimeout(() => modalOverlay.style.opacity = '1', 10);
+    });
 
         const headFicha = document.querySelector('.head-ficha');
         if (headFicha) {
@@ -298,18 +328,18 @@ function ajustarEscalaDoPainel() {
     const painel = document.querySelector('.glass-panel');
     if (!painel) return;
     
-    // Medidas exatas cravadas no CSS
-    const larguraBase = 1600; 
-    const alturaBase = 900;
+    // Medidas cravadas no CSS para manter a proporção perfeita
+    const larguraBase = 1400; 
+    const alturaBase = 760;
     
-    // Margem de 90% para imitar a sua visualização original
+    // Margem confortável à volta (90%)
     const larguraTela = window.innerWidth * 0.90;
     const alturaTela = window.innerHeight * 0.90;
     
-    // Calcula a escala perfeita
+    // Calcula a escala ideal sem cortar nada
     let escala = Math.min(larguraTela / larguraBase, alturaTela / alturaBase);
     
-    // Trava para não ficar gigante em monitores grandes
+    // Trava para não esticar de forma exagerada em ecrãs gigantes
     if (escala > 1) {
         escala = 1;
     }
@@ -317,6 +347,6 @@ function ajustarEscalaDoPainel() {
     painel.style.transform = `scale(${escala})`;
 }
 
-// Executa ao carregar a página e sempre que redimensionar a janela
 window.addEventListener('resize', ajustarEscalaDoPainel);
 document.addEventListener('DOMContentLoaded', ajustarEscalaDoPainel);
+
