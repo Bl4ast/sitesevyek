@@ -554,18 +554,18 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
 }
 
 @media (max-width: 1400px), (max-height: 900px) {
-    /* Força o painel principal a ajustar-se à altura exata do ecrã */
     .glass-panel {
         flex-direction: row !important;
-        width: 96vw !important;
-        max-width: 1300px;
-        height: 96vh !important;
-        max-height: 820px;
+        width: 95vw !important;
+        max-width: 1250px;
+        height: auto !important; /* Deixa a altura fluida para nunca cortar */
+        min-height: 85vh;       /* Garante um tamanho bom mas sem prender excessivamente */
+        max-height: 92vh;       /* Evita que ultrapasse o ecrã */
         padding: 10px 15px !important;
         gap: 12px !important;
         box-sizing: border-box;
-        overflow: hidden !important;
     }
+}
 
     /* Coluna Esquerda (Arte de Corpo Inteiro) */
     .panel-left-art {
