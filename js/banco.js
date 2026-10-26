@@ -3,13 +3,13 @@
 // ==========================================
 
 const configuracoes_animacao = {
-    tempoLua: 2500,   
-    tempoKaboom: 1500 
+    tempoLua: 1800,   
+    tempoKaboom: 1000 
 };
 
 const personagens = {
     'sevyek': {  
-        nome: 'Hyacine PonPon',
+        nome: '',
         cor_principal: '#0e257e',
         avatar: 'SevyIMGS/ArteIni.png', 
         
@@ -68,9 +68,9 @@ const personagens = {
         ],
         
         artes: [
-            { img: 'SevyIMGS/arte1.jpg', artista: 'Artista @eli_walker' },
-            { img: 'SevyIMGS/arte2.jpg', artista: 'Artista @luhtaki' },
-            { img: 'SevyIMGS/arte3.jpg', artista: 'Artista @Candy' }
+            { img: 'SevyIMGS/arte1.jpg', artista: 'Artista ' },
+            { img: 'SevyIMGS/arte2.jpg', artista: 'Artista ' },
+            { img: 'SevyIMGS/arte3.jpg', artista: 'Artista ' }
         ],
         face_texto: '<p>ㅤHyacine se encaixa na Face do Futuro por sua necessidade constante de compreender aquilo que ainda não aconteceu, seus sonhos permitem que ele contemple diferentes versões de sua vida, vivenciando possibilidades que se estendem por décadas e chegando a experimentar realidades nas quais suas escolhas conduzem a resultados completamente distintos. Essa experiência, entretanto, torna cada vez mais difícil distinguir as lembranças que realmente lhe pertencem daquelas construídas em seus sonhos, sua relação com o futuro não é motivada apenas pela curiosidade, mas também pelo medo de perder aquilo que considera precioso... Hélio, seu irmão, ocupa um lugar central nessa preocupação, tornando-se uma das principais razões pelas quais Hyacine insiste em procurar caminhos alternativos. Ao imaginar futuros nos quais algo terrível acontece com aqueles que ama, ele sente a necessidade de encontrar uma possibilidade diferente, uma realidade em que possa evitar o sofrimento, essa busca, porém, acaba se tornando uma prisão. Hyacine tem dificuldade em abandonar uma possibilidade quando acredita que ainda existe alguma maneira de modificá-la, mesmo diante de situações que não pode controlar, continua procurando respostas, revisitando cenários e tentando compreender o que poderia ter feito de outra forma. A esperança de encontrar um futuro melhor, que inicialmente o incentiva a seguir em frente, também pode impedi-lo de reconhecer os limites de suas próprias escolhas.</p> <p>ㅤOutro aspecto que o aproxima dessa Face é sua relação contraditória com o destino, embora deseje acreditar que suas ações podem alterar os acontecimentos, Hyacine também teme que determinadas coisas estejam destinadas a ocorrer, independentemente de seus esforços... essa incerteza alimenta sua ansiedade, se o futuro pode ser mudado, ele precisa encontrar a escolha correta, se é imutável, precisa aprender a conviver com aquilo que já viu.</p>',
         aprovacao: '<p>ㅤAcredito que tenho bastante a desenvolver com Hyacine dentro do projeto, tanto em relação às entidades quanto às interações com os outros jogadores... tenho bastante interesse em explorar a ideia de um personagem curioso, mas que também possui um lado paranoico, principalmente pela maneira como isso pode influenciar suas escolhas, seus pensamentos e a forma como ele interpreta as situações ao seu redor. Também gostaria de desenvolver melhor a relação dele com meu atual parceiro, Aster! Acho que essa será uma oportunidade muito interessante para construirmos uma dinâmica juntos e explorarmos como nossos personagens podem influenciar um ao outro ao longo da história.</p> <p>ㅤAlém disso, tenho muita vontade de conhecer melhor o projeto e seu universo, gostei bastante das mecânicas apresentadas e fiquei com vontade de explorar tudo o que elas podem proporcionar para a construção do personagem... acredito que, com o tempo livre que tenho disponível, conseguirei me dedicar bastante à busca por informações e à exploração da lore, encontrando detalhes que possam contribuir para o desenvolvimento de Hyacine. No geral, vejo muito potencial para trabalhar diferentes aspectos do personagem, criar relações e contribuir com pequenas ideias e construções dentro do universo.</p>',
