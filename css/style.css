@@ -526,43 +526,16 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
     transform: translateY(15px); /* Faz um leve deslize para baixo ao sair */
 }
 
-/* =======================================================
-   ✨ RESPONSIVIDADE ADAPTATIVA (TABLETS E JANELAS MÉDIAS) ✨
-   ======================================================= */
-
-/* Para ecrãs com largura inferior a 1200px (Portáteis menores e janelas redimensionadas) */
-@media (max-width: 1200px) {
-    .glass-panel {
-        flex-direction: column !important;
-        width: 90vw !important;
-        max-width: 700px;
-        height: auto !important;
-        max-height: 85vh;
-        overflow-y: auto;
-        padding: 20px !important;
-    }
-
-    .panel-left-art, .panel-right-content {
-        width: 100% !important;
-        height: auto !important;
-    }
-
-    .panel-left-art {
-        min-height: 350px;
-        margin-bottom: 20px;
-    }
-}
-
 @media (max-width: 1400px), (max-height: 900px) {
-    /* Mantém o painel perfeitamente alinhado lado a lado */
+    /* Força o painel principal a ajustar-se à altura exata do ecrã */
     .glass-panel {
         flex-direction: row !important;
-        width: 95vw !important;
-        max-width: 1250px;
-        height: 90vh !important;
-        max-height: 800px;
-        padding: 12px 18px !important;
-        gap: 15px !important;
+        width: 96vw !important;
+        max-width: 1300px;
+        height: 96vh !important;
+        max-height: 820px;
+        padding: 10px 15px !important;
+        gap: 12px !important;
         box-sizing: border-box;
         overflow: hidden !important;
     }
@@ -571,6 +544,7 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
     .panel-left-art {
         width: 38% !important;
         height: 100% !important;
+        min-height: unset !important;
     }
 
     .character-full-art {
@@ -580,34 +554,34 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
         background-position: center bottom;
     }
 
-    /* Coluna Direita (Dashboard estruturada) */
+    /* Coluna Direita (Dashboard compactada para nunca transbordar) */
     .panel-right-content {
         width: 62% !important;
         height: 100% !important;
         display: flex !important;
         flex-direction: column !important;
         justify-content: space-between !important;
-        gap: 6px !important;
+        gap: 4px !important;
         overflow: hidden !important;
     }
 
     /* Player de música compacto */
     .box-playlist {
-        padding: 4px 10px !important;
+        padding: 4px 8px !important;
         margin-bottom: 0 !important;
     }
     .box-playlist iframe {
-        height: 45px !important;
+        height: 48px !important;
     }
 
-    /* Grelha de estatísticas */
+    /* Grelha de estatísticas compacta */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 5px !important;
+        gap: 4px !important;
     }
 
     .stat-item {
-        padding: 5px 8px !important;
+        padding: 4px 8px !important;
         font-size: 0.8rem;
     }
 
@@ -620,32 +594,24 @@ h1, h2, h3, h4, .char-name, .btn-neon, #btn-ler-lore, .btn-face-futuro {
 
     /* Ícones das cabeças */
     .box-heads {
-        gap: 8px !important;
+        gap: 6px !important;
         margin-bottom: 2px !important;
     }
     .head-icon {
-        height: 38px !important;
+        height: 35px !important;
     }
 
-    /* Caixa de arte à direita (garante que nunca desaparece) */
-    .box-arte-lukea {
-        flex: 1 !important;
-        min-height: 100px !important;
-        background-size: cover !important;
-        background-position: center !important;
-    }
-
-    /* Botões Neon organizados em grelha limpa */
+    /* Botões Neon perfeitamente encaixados no rodapé */
     .box-botoes-neon {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;
-        gap: 5px !important;
+        gap: 4px !important;
     }
 
     .btn-neon {
         width: 100% !important;
-        padding: 6px 4px !important;
-        font-size: 0.7rem !important;
+        padding: 6px 2px !important;
+        font-size: 0.68rem !important;
         letter-spacing: 0.3px !important;
     }
 }
