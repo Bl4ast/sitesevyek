@@ -293,3 +293,30 @@ document.addEventListener('DOMContentLoaded', () => {
     if (panelLeft) { panelLeft.addEventListener('click', () => ativarTransicao(charEsquerda, charEsquerda.cor_principal, panelLeft, 'sevyek')); }
     if (panelRight) { panelRight.addEventListener('click', () => ativarTransicao(charDireita, charDireita.cor_principal, panelRight, 'nyev')); }
 });
+
+function ajustarEscalaDoPainel() {
+    const painel = document.querySelector('.glass-panel');
+    if (!painel) return;
+    
+    // Medidas exatas cravadas no CSS
+    const larguraBase = 1600; 
+    const alturaBase = 900;
+    
+    // Margem de 90% para imitar a sua visualização original
+    const larguraTela = window.innerWidth * 0.90;
+    const alturaTela = window.innerHeight * 0.90;
+    
+    // Calcula a escala perfeita
+    let escala = Math.min(larguraTela / larguraBase, alturaTela / alturaBase);
+    
+    // Trava para não ficar gigante em monitores grandes
+    if (escala > 1) {
+        escala = 1;
+    }
+    
+    painel.style.transform = `scale(${escala})`;
+}
+
+// Executa ao carregar a página e sempre que redimensionar a janela
+window.addEventListener('resize', ajustarEscalaDoPainel);
+document.addEventListener('DOMContentLoaded', ajustarEscalaDoPainel);
