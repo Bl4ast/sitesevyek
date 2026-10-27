@@ -13,8 +13,8 @@ const personagens = {
         cor_principal: '#0e257e',
         avatar: 'SevyIMGS/ArteIni.png', 
         
-        arte_corpo_inteiro: 'SevyIMGS/Corpo Inteiro.png',
-        arte_corpo_inteiro_hover: 'SevyIMGS/Corpo Inteiro.png', 
+        arte_corpo_inteiro: 'SevyIMGS/CorpoInteiro.png',
+        arte_corpo_inteiro_hover: 'SevyIMGS/CorpoInteiro.png', 
         background_img: 'SevyIMGS/Back3.jpg', 
         background_blur: '15px', 
         
